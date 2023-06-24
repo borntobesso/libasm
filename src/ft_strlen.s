@@ -9,7 +9,7 @@
 ; Any remaining arguments are passed on the stack in reverse order so that they can be popped off the stack in order. 
 ; The callee places its return value in %rax and is responsible for cleaning up its local variables as well as for removing the return address from the stack. 
 
-section. text
+section .text
     global ft_strlen
 
 ft_strlen:
