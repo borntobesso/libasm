@@ -47,7 +47,7 @@ $(NAME): $(OBJECTS)
 	@echo "Created "$(NAME)" successfully!"
 	
 tester: $(NAME)
-	@$(CC) $(CFLAGS) $(MAIN) -L -lasm -o $(TESTER)
+	@$(CC) $(CFLAGS) $(MAIN) -L./lasm -o $(TESTER)
 	@echo "Created "$(TESTER)" successfully!"
 
 clean:
