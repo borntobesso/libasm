@@ -11,13 +11,13 @@ ft_strcpy:
     mov rcx, 0          ; Initialize counter to 0
 
 .copy_loop:
-    mov al, [rdi + rcx] ; Load next character from source into al
-    mov [rsi + rcx], al ; Copy character from source to destination
-    cmp al, 0           ; Check for null terminator
+    mov bl, [rsi + rcx] ; Load next character from source into al
+    mov [rdi + rcx], bl ; Copy character from source to destination
+    cmp bl, 0           ; Check for null terminator
     je .done            ; If null terminator, exit
     inc rcx             ; Increment counter
     jmp .copy_loop      ; Repeat loop
     
 .done:
-    mov rax, rsi        ; Move destination pointer to rax (return value)
+    mov rax, rdi        ; Move destination pointer to rax (return value)
     ret                 ; Return from function

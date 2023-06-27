@@ -1,6 +1,6 @@
 section .text
 	global ft_write
-	extern errno_location
+	extern __errno_location
 	
 ft_write:
 	mov rax, 1			; System call number for write
@@ -16,7 +16,7 @@ ft_write:
 	
 .handle_error:
 	mov rdi, rax		; Move error code to rdi to pass as an argument to error_location
-	call errno_location	; Call error_location to print error message
+	call __errno_location WRT ..plt		; Call error_location to print error message
 	
 	mov [rax], rax		; Store error code in memory location pointed to by rax
 	; ; The error code is now stored in rax, move it to a register or memory location for further processing

@@ -1,6 +1,6 @@
 section .text
 	global ft_read
-	extern errno_location
+	extern __errno_location
 
 ft_read:
 	mov rax, 0				; System call number for read
@@ -15,10 +15,12 @@ ft_read:
 	ret						; Return from function
 	
 .handle_error:
-	mov rdi, rax		; Move error code to rdi to pass as an argument to error_location
-	call errno_location	; Call error_location to print error message
+	neg rax					; Negate the return value to get the error code
+	mov rdi, rax			; Move error code to rdi to pass as an argument to error_location
+	call __errno_location WRT ..plt	; Call error_location to print error message
 	
-	mov [rax], rax 		; Store error code in memory location pointed to by rax
+	mov qword [rax], rdi 	; Store error code in memory location pointed to by rax
+	mov rax, -1				; Set return value to -1
 	; ; The error code is now stored in rax, move it to a register or memory location for further processing
 	; mov ebx, eax		; Move error code to ebx assuming the returned value is sufficiently small for lower 32 bits
 	

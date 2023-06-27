@@ -15,8 +15,9 @@ section .text
 ft_strlen:
     mov rax, 0          ; initialize counter to 0
 .loop:
-    mov al, [rdi+rax]   ; load byte from memory at address rdi+rax into al
-    cmp al, 0           ; check for null terminator
+    ;mov al, [rdi+rax]   ; load byte from memory at address rdi+rax into al
+    ;cmp al, 0           ; check for null terminator
+    cmp byte [rdi+rax], 0
     je .done            ; if null terminator, exit loop
     inc rax             ; increment counter
     jmp .loop           ; repeat loop
