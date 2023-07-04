@@ -4,7 +4,7 @@ NASM = nasm
 
 SYSTEM = $(shell uname -s)
 
-CC = gcc
+CC = clang
 
 CFLAGS = -Wall -Wextra -Werror
 

@@ -47,45 +47,60 @@ int main(void)
 	printf("%sstrcmp(\"Hello\", \"\") = %d\n%s", GREEN, strcmp("Hello", ""), RESET);
 	// printf("ft_strcmp(5, 5) = %d\n", ft_strcmp(5, 5));
 	// printf("%sstrcmp(5, 5) = %d\n%s", GREEN, strcmp(5, 5), RESET);
+
 	printf("\n");
-	printf("%sft_write() test\n%s", BLUE, RESET);
-	printf("ft_write(1, \"Hello\\n\", 6) = %zd\n", ft_write(1, "Hello\n", 6));
-	printf("%swrite(1, \"Hello\\n\", 6) = %zd\n%s", GREEN, write(1, "Hello\n", 6), RESET);
-	printf("ft_write(1, \"Hello\\n\", 0) = %zd\n", ft_write(1, "Hello\n", 0));
-	printf("%swrite(1, \"Hello\\n\", 0) = %zd\n%s", GREEN, write(1, "Hello\n", 0), RESET);
+	printf("%sft_write() test", BLUE);
+	printf("%s\n", RESET);
+
+	printf("ft_write(1, \"Hello\\n\", 6) = %zd", ft_write(1, "Hello\n", 6));
+	printf("%s\n", GREEN);
+	printf("write(1, \"Hello\\n\", 6) = %zd", write(1, "Hello\n", 6));
+	printf("%s\n", RESET);
+	printf("ft_write(1, \"Hello\\n\", 0) = %zd", ft_write(1, "Hello\n", 0));
+	printf("%s\n", GREEN);
+	printf("write(1, \"Hello\\n\", 0) = %zd", write(1, "Hello\n", 0));
+	printf("%s\n", RESET);
 	// printf("ft_write(1, \"Hello\\n\", -1) = %zd\n", ft_write(1, "Hello\n", -1));
 	// if (errno != 0)
 	// 	printf("errno for ft_write(): %s\n", strerror(errno));
 	// printf("%swrite(1, \"Hello\\n\", -1) = %zd\n%s", GREEN, write(1, "Hello\n", -1), RESET);
 	// if (errno != 0)
 	// 	printf("%serrno for write(): %s\n%s", GREEN, strerror(errno), RESET);
-	printf("ft_write(1, \"Hello\\n\", 5) = %zd\n", ft_write(1, "Hello\n", 5));
-	printf("%swrite(1, \"Hello\\n\", 5) = %zd\n%s", GREEN, write(1, "Hello\n", 5), RESET);
-	printf("ft_write(1, \"Hello\\n\", 7) = %zd\n", ft_write(1, "Hello\n", 7));
+	printf("ft_write(1, \"Hello\\n\", 6) = %zd", ft_write(1, "Hello\n", 6));
+	printf("%s\n", GREEN);
+	printf("write(1, \"Hello\\n\", 6) = %zd", write(1, "Hello\n", 6));
+	printf("%s\n", RESET);
+	printf("ft_write(-1, \"Hello\\n\", 6) = %zd\n", ft_write(-1, "Hello\n", 6));
 	if (errno != 0)
-		printf("errno for ft_write(): %s\n", strerror(errno));
-	printf("%swrite(1, \"Hello\\n\", 7) = %zd\n%s", GREEN, write(1, "Hello\n", 7), RESET);
+		printf("errno for ft_write(): %s", strerror(errno));
+	printf("%s\n", GREEN);
+	printf("write(-1, \"Hello\\n\", 6) = %zd\n", write(-1, "Hello\n", 6));
 	if (errno != 0)
-		printf("%serrno for write(): %s\n%s", GREEN, strerror(errno), RESET);
-	printf("\n");
-	printf("%sft_read() test\n%s", BLUE, RESET);
+		printf("errno for write(): %s", strerror(errno));
+	printf("%s\n", RESET);
+	printf("%sft_read() test%s\n", BLUE, RESET);
+
 	char buf[100];
 	printf("ft_read(0, buf, 5) = %zd\n", ft_read(0, buf, 5));
 	printf("text ft_read(): %s\n", buf);
-	printf("%sread(0, buf, 5) = %zd\n%s", GREEN, read(0, buf, 5), RESET);
+	printf("%sread(0, buf, 5) = %zd\n", GREEN, read(0, buf, 5));
 	printf("text read(): %s\n", buf);
 	int fd = open("./Makefile", O_RDONLY);
 	int fd2 = open("./Makefile", O_RDONLY);
+	printf("%s\n", RESET);
 	printf("ft_read(fd, buf, 100) = %zd\n", ft_read(fd, buf, 100));
 	printf("text ft_read(): %s\n", buf);
+	printf("\n");
 	printf("%sread(fd, buf, 100) = %zd\n%s", GREEN, read(fd2, buf, 100), RESET);
-	printf("text read(): %s\n", buf);
+	printf("%stext read(): %s\n%s", GREEN, buf, RESET);
+	printf("\n");
 	printf("ft_read(-1, buf, 0) = %zd\n", ft_read(-1, buf, 0));
 	if (errno != 0)
 		printf("errno for ft_read(): %s\n", strerror(errno));
 	printf("%sread(-1, buf, 0) = %zd\n%s", GREEN, read(-1, buf, 0), RESET);
 	if (errno != 0)
 		printf("%serrno for read(): %s\n%s", GREEN, strerror(errno), RESET);
+
 	printf("\n");
 	printf("%sft_strdup() test\n%s", BLUE, RESET);
 	printf("ft_strdup(\"Hello\") = %s\n", ft_strdup("Hello"));
