@@ -4,6 +4,7 @@
 #include <unistd.h>
 #include <errno.h>
 #include <fcntl.h>
+#include <stdlib.h>
 #define RESET "\033[0m"
 #define RED "\033[31m"
 #define GREEN "\033[32m"
@@ -81,32 +82,46 @@ int main(void)
 	printf("%sft_read() test%s\n", BLUE, RESET);
 
 	char buf[100];
-	printf("ft_read(0, buf, 5) = %zd\n", ft_read(0, buf, 5));
+	bzero(buf, 100);
+	printf("ft_read(0, buf, 99) = %zd\n", ft_read(0, buf, 99));
 	printf("text ft_read(): %s\n", buf);
-	printf("%sread(0, buf, 5) = %zd\n", GREEN, read(0, buf, 5));
+	printf("%sread(0, buf, 99) = %zd\n", GREEN, read(0, buf, 99));
 	printf("text read(): %s\n", buf);
 	int fd = open("./Makefile", O_RDONLY);
 	int fd2 = open("./Makefile", O_RDONLY);
 	printf("%s\n", RESET);
-	printf("ft_read(fd, buf, 100) = %zd\n", ft_read(fd, buf, 100));
+	int result = ft_read(fd, buf, 99);
+	printf("ft_read(fd, buf, 99) = %d\n", result);
 	printf("text ft_read(): %s\n", buf);
 	printf("\n");
-	printf("%sread(fd, buf, 100) = %zd\n%s", GREEN, read(fd2, buf, 100), RESET);
+	result = read(fd2, buf, 99);
+	printf("%sread(fd, buf, 99) = %d\n%s", GREEN, result, RESET);
 	printf("%stext read(): %s\n%s", GREEN, buf, RESET);
 	printf("\n");
-	printf("ft_read(-1, buf, 0) = %zd\n", ft_read(-1, buf, 0));
+	result = ft_read(-1, buf, 0);
+	printf("ft_read(-1, buf, 0) = %d\n", result);
 	if (errno != 0)
 		printf("errno for ft_read(): %s\n", strerror(errno));
-	printf("%sread(-1, buf, 0) = %zd\n%s", GREEN, read(-1, buf, 0), RESET);
+	result = read(-1, buf, 0);
+	printf("%sread(-1, buf, 0) = %d\n%s", GREEN, result, RESET);
 	if (errno != 0)
 		printf("%serrno for read(): %s\n%s", GREEN, strerror(errno), RESET);
 
 	printf("\n");
 	printf("%sft_strdup() test\n%s", BLUE, RESET);
-	printf("ft_strdup(\"Hello\") = %s\n", ft_strdup("Hello"));
-	printf("%sstrdup(\"Hello\") = %s\n%s", GREEN, strdup("Hello"), RESET);
-	printf("ft_strdup(\"\") = %s\n", ft_strdup(""));
-	printf("%sstrdup(\"\") = %s\n%s", GREEN, strdup(""), RESET);
+	char *res;
+	res = ft_strdup("Hello");
+	printf("ft_strdup(\"Hello\") = %s\n", res);
+	free(res);
+	res = strdup("Hello");
+	printf("%sstrdup(\"Hello\") = %s\n%s", GREEN, res, RESET);
+	free(res);
+	res = ft_strdup("");
+	printf("ft_strdup(\"\") = %s\n", res);
+	free(res);
+	res = strdup("");
+	printf("%sstrdup(\"\") = %s\n%s", GREEN, res, RESET);
+	free(res);
 	// printf("ft_strdup(5) = %s\n", ft_strdup(5));
 	// printf("%sstrdup(5) = %s\n%s", GREEN, strdup(5), RESET);
 	printf("\n");

@@ -11,7 +11,6 @@ ft_strdup:
 	inc rdi							; Add 1 to the length of the input string to account for the null terminator
 				
 	; Allocate memory for the new string
-	;push rdi						; Save the length of the input string
 	call malloc	WRT ..plt			; Call malloc to allocate memory for the new string
 	test rax, rax					; Check if malloc failed
 	jz malloc_fail					; Jump to malloc_fail if malloc failed
@@ -21,12 +20,6 @@ ft_strdup:
 	pop rsi							; Restore the input string address
 	call ft_strcpy					; Call ft_strcpy to copy the input string to the new string
 
-	; pop rcx
-	; dec rcx							; Restore the length of the input string and use it as a counter
-	; pop rsi							; Restore the input string address
-	; rep movsb						; Copy the input string to the new string (from rsi to rdi, Repeat String Operation Prefix)
-	; mov byte [rdi + rcx], 0			; Add the null terminator to the new string
-	; mov rax, rdi					; Move the new string address to rax
 	ret	
 	
 malloc_fail:
