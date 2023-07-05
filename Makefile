@@ -20,7 +20,7 @@ DEPS = $(SRCS:.s=.d)
 
 MAIN = main.c
 
-TESTER = tester
+EXEC = tester
 
 #$(patsubst PATTERN, POST_SUBSTITUTE_PATTERN, VARIABLE)
 OBJECTS = $(patsubst %.o,$(OBJ_DIR)/%.o,$(OBJS))
@@ -46,20 +46,22 @@ $(NAME): $(OBJECTS)
 	@ar rcs $(NAME) $(OBJECTS)
 	@echo "Created "$(NAME)" successfully!"
 	
-tester: $(NAME)
-	@$(CC) $(CFLAGS) $(MAIN) -L. -lasm -fPIE -o $(TESTER)
-	@echo "Created "$(TESTER)" successfully!"
+$(EXEC): $(NAME)
+	@$(CC) $(CFLAGS) $(MAIN) -L. -lasm -fPIE -o $@
+	@echo "Created "$(EXEC)" successfully!"
 
 clean:
 	@rm -rf $(OBJ_DIR)
 	@echo "Removed "$(OBJ_DIR)" successfully!"
 
 fclean: clean
-	@rm -f $(NAME) $(TESTER)
-	@echo "Removed "$(NAME), $(TESTER)" successfully!"
+	@rm -f $(NAME) $(EXEC)
+	@echo "Removed "$(NAME), $(EXEC)" successfully!"
 
 re: fclean all
 
 -include $(DEPS)
 
-.PHONY: all tester clean fclean re
+test: $(EXEC)
+
+.PHONY: all test clean fclean re
